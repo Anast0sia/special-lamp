@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.exceptions;
 
 public class UnauthorizedUser extends RuntimeException {
     public UnauthorizedUser(String msg) {

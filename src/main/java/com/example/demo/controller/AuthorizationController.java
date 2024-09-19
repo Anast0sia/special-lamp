@@ -1,5 +1,10 @@
-package com.example.demo;
+package com.example.demo.controller;
 
+import com.example.demo.authorities.Authorities;
+import com.example.demo.service.AuthorizationService;
+import com.example.demo.exceptions.InvalidCredentials;
+import com.example.demo.exceptions.UnauthorizedUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,7 +16,12 @@ import java.util.List;
 
 @RestController
 public class AuthorizationController {
-    AuthorizationService service = new AuthorizationService();
+    final AuthorizationService service;
+
+    @Autowired
+    public AuthorizationController(AuthorizationService service) {
+        this.service = service;
+    }
 
     @GetMapping("/authorize")
     public List<Authorities> getAuthorities(@RequestParam("user") String user, @RequestParam("password") String password) {

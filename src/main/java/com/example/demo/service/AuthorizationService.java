@@ -1,14 +1,24 @@
-package com.example.demo;
+package com.example.demo.service;
 
+import com.example.demo.authorities.Authorities;
+import com.example.demo.exceptions.InvalidCredentials;
+import com.example.demo.exceptions.UnauthorizedUser;
+import com.example.demo.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class AuthorizationService {
-    UserRepository userRepository = new UserRepository();
+    final UserRepository userRepository;
 
-    List<Authorities> getAuthorities(String user, String password) {
+    @Autowired
+    public AuthorizationService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public List<Authorities> getAuthorities(String user, String password) {
         if (isEmpty(user) || isEmpty(password)) {
             throw new InvalidCredentials("User name or password is empty");
         }
