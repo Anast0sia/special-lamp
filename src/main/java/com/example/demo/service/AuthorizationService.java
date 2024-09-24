@@ -11,9 +11,8 @@ import java.util.List;
 
 @Service
 public class AuthorizationService {
-    final UserRepository userRepository;
+    final private UserRepository userRepository;
 
-    @Autowired
     public AuthorizationService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
